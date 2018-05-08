@@ -34,7 +34,7 @@ class ApiTest extends TestCase {
 
         // Create a group
         $group_name = $this->RandomString(20);
-        $this->group = $this->api->create_group($group_name, "Test course", "Test course description.");
+        $this->group = $this->api->createGroup($group_name, "Test course", "Test course description.");
     }
 
     protected function tearDown(){

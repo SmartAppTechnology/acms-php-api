@@ -34,10 +34,10 @@ class ApiTestEvidence extends TestCase {
 
         // Create a group
         $group_name = $this->RandomString(20);
-        $this->group = $this->api->create_group($group_name, "Test course", "Test course description.");
+        $this->group = $this->api->createGroup($group_name, "Test course", "Test course description.");
 
         // Create a credential
-        $this->credential = $this->api->create_credential("John Doe", "john@example.com", $this->group->group->id);
+        $this->credential = $this->api->createCredential("John Doe", "john@example.com", $this->group->group->id);
     }
 
     protected function tearDown(){
