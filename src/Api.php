@@ -46,7 +46,7 @@ class Api implements ApiInterface
     {
         $client = new Client();
 
-        $params = array('headers' => array('Authorization' => 'Token token="' . $this->getApiKey() . '"'));
+        $params = ['headers' => ['Authorization' => 'Token token="' . $this->getApiKey() . '"']];
 
         $response = $client->get($this->apiEndpoint . 'credentials/' . $id, $params);
 
@@ -77,13 +77,13 @@ class Api implements ApiInterface
     {
         $client = new Client();
 
-        $params = array('headers' => array('Authorization' => 'Token token="' . $this->getApiKey() . '"'));
-        $params['query'] = array(
+        $params = ['headers' => ['Authorization' => 'Token token="' . $this->getApiKey() . '"']];
+        $params['query'] = [
             'group_id' => $group_id,
-            'email' => rawurlencode($email),
+            'email' => $email,
             'page_size' => $page_size,
             'page' => $page,
-        );
+        ];
 
         $response = $client->get($this->apiEndpoint . 'all_credentials', $params);
 
@@ -103,27 +103,27 @@ class Api implements ApiInterface
         $custom_attributes = null
     ) {
 
-        $data = array(
-            "credential" => array(
+        $data = [
+            "credential" => [
                 "group_id" => $course_id,
-                "recipient" => array(
+                "recipient" => [
                     "name" => $recipient_name,
                     "email" => $recipient_email
-                ),
+                ],
                 "issued_on" => $issued_on,
                 "expired_on" => $expired_on,
                 "custom_attributes" => $custom_attributes
-            )
-        );
+            ]
+        ];
 
         $client = new Client();
 
-        $params = array('Authorization' => 'Token token="' . $this->getApiKey() . '"');
+        $params = ['Authorization' => 'Token token="' . $this->getApiKey() . '"'];
 
-        $response = $client->post($this->apiEndpoint . 'credentials', array(
+        $response = $client->post($this->apiEndpoint . 'credentials', [
             'headers' => $params,
             'json' => $data
-        ));
+        ]);
 
         $result = json_decode($response->getBody());
 
@@ -157,30 +157,30 @@ class Api implements ApiInterface
         $custom_attributes = null
     ) {
 
-        $data = array(
-            "credential" => array(
+        $data = [
+            "credential" => [
                 "group_name" => $achievement_name,
-                "recipient" => array(
+                "recipient" => [
                     "name" => $recipient_name,
                     "email" => $recipient_email
-                ),
+                ],
                 "issued_on" => $issued_on,
                 "expired_on" => $expired_on,
                 "custom_attributes" => $custom_attributes,
                 "name" => $course_name,
                 "description" => $course_description,
                 "course_link" => $course_link
-            )
-        );
+            ]
+        ];
 
         $client = new Client();
 
-        $params = array('Authorization' => 'Token token="' . $this->getApiKey() . '"');
+        $params = ['Authorization' => 'Token token="' . $this->getApiKey() . '"'];
 
-        $response = $client->post($this->apiEndpoint . 'credentials', array(
+        $response = $client->post($this->apiEndpoint . 'credentials', [
             'headers' => $params,
             'json' => $data
-        ));
+        ]);
 
         $result = json_decode($response->getBody());
 
@@ -210,28 +210,28 @@ class Api implements ApiInterface
         $custom_attributes = null
     ) {
 
-        $data = array(
-            "credential" => array(
+        $data = [
+            "credential" => [
                 "group_id" => $course_id,
-                "recipient" => array(
+                "recipient" => [
                     "name" => $recipient_name,
                     "email" => $recipient_email
-                ),
+                ],
                 "issued_on" => $issued_on,
                 "expired_on" => $expired_on,
                 "custom_attributes" => $custom_attributes
-            )
-        );
+            ]
+        ];
         $data = $this->stripEmptyKeys($data);
 
         $client = new Client();
 
-        $params = array('Authorization' => 'Token token="' . $this->getApiKey() . '"');
+        $params = ['Authorization' => 'Token token="' . $this->getApiKey() . '"'];
 
-        $response = $client->put($this->apiEndpoint . 'credentials/' . $id, array(
+        $response = $client->put($this->apiEndpoint . 'credentials/' . $id, [
             'headers' => $params,
             'json' => $data
-        ));
+        ]);
 
         $result = json_decode($response->getBody());
 
@@ -258,7 +258,7 @@ class Api implements ApiInterface
     {
         $client = new Client();
 
-        $options = array('headers' => array('Authorization' => 'Token token="' . $this->getApiKey() . '"'));
+        $options = ['headers' => ['Authorization' => 'Token token="' . $this->getApiKey() . '"']];
         $response = $client->delete($this->apiEndpoint . 'credentials/' . $id, $options);
 
         $result = json_decode($response->getBody());
@@ -271,21 +271,21 @@ class Api implements ApiInterface
      */
     public function createGroup($name, $course_name, $course_description, $course_link = null)
     {
-        $data = array(
-            "group" => array(
+        $data = [
+            "group" => [
                 "name" => $name,
                 "course_name" => $course_name,
                 "course_description" => $course_description,
                 "course_link" => $course_link
-            )
-        );
+            ]
+        ];
 
         $client = new Client();
 
-        $response = $client->post($this->apiEndpoint . 'issuer/groups', array(
-            'headers' => array('Authorization' => 'Token token="' . $this->getApiKey() . '"'),
+        $response = $client->post($this->apiEndpoint . 'issuer/groups', [
+            'headers' => ['Authorization' => 'Token token="' . $this->getApiKey() . '"'],
             'json' => $data
-        ));
+        ]);
 
         $result = json_decode($response->getBody());
 
@@ -298,7 +298,7 @@ class Api implements ApiInterface
     public function getGroup($id)
     {
         $client = new Client();
-        $options = array('headers' => array('Authorization' => 'Token token="' . $this->getApiKey() . '"'));
+        $options = ['headers' => ['Authorization' => 'Token token="' . $this->getApiKey() . '"']];
         $response = $client->get($this->apiEndpoint . 'issuer/groups/' . $id, $options);
 
         $result = json_decode($response->getBody());
@@ -311,13 +311,13 @@ class Api implements ApiInterface
     public function getGroups($page_size = null, $page = 1)
     {
         $client = new Client();
-        $options = array(
-            'headers' => array('Authorization' => 'Token token="' . $this->getApiKey() . '"'),
-            'query' => array(
+        $options = [
+            'headers' => ['Authorization' => 'Token token="' . $this->getApiKey() . '"'],
+            'query' => [
                 'page_size' => $page_size,
                 'page' => $page,
-            ),
-        );
+            ],
+        ];
 
         $response = $client->get($this->apiEndpoint . 'issuer/all_groups', $options);
 
@@ -337,23 +337,23 @@ class Api implements ApiInterface
         $design_id = null
     ) {
 
-        $data = array(
-            "group" => array(
+        $data = [
+            "group" => [
                 "name" => $name,
                 "course_name" => $course_name,
                 "course_description" => $course_description,
                 "course_link" => $course_link,
                 "design_id" => $design_id
-            )
-        );
+            ]
+        ];
         $data = $this->stripEmptyKeys($data);
 
         $client = new Client();
 
-        $response = $client->put($this->apiEndpoint . 'issuer/groups/' . $id, array(
-            'headers' => array('Authorization' => 'Token token="' . $this->getApiKey() . '"'),
+        $response = $client->put($this->apiEndpoint . 'issuer/groups/' . $id, [
+            'headers' => ['Authorization' => 'Token token="' . $this->getApiKey() . '"'],
             'json' => $data
-        ));
+        ]);
 
         $result = json_decode($response->getBody());
 
@@ -367,7 +367,7 @@ class Api implements ApiInterface
     {
         $client = new Client();
 
-        $options = array('headers' => array('Authorization' => 'Token token="' . $this->getApiKey() . '"'));
+        $options = ['headers' => ['Authorization' => 'Token token="' . $this->getApiKey() . '"']];
         $response = $client->delete($this->apiEndpoint . 'issuer/groups/' . $id, $options);
 
         $result = json_decode($response->getBody());
@@ -375,20 +375,20 @@ class Api implements ApiInterface
         return $result;
     }
 
-   /**
-    * {@inheritdoc}
-    */
+    /**
+     * {@inheritdoc}
+     */
     public function getDesigns($page_size = null, $page = 1)
     {
         $client = new Client();
 
-        $options = array(
-            'headers' => array('Authorization' => 'Token token="' . $this->getApiKey() . '"'),
-            'query' => array(
+        $options = [
+            'headers' => ['Authorization' => 'Token token="' . $this->getApiKey() . '"'],
+            'query' => [
                 'page_size' => $page_size,
                 'page' => $page,
-            ),
-        );
+            ],
+        ];
         $response = $client->get($this->apiEndpoint . 'issuer/all_designs?', $options);
 
         $result = json_decode($response->getBody());
@@ -402,14 +402,14 @@ class Api implements ApiInterface
     {
 
         if (is_numeric($grade) && intval($grade) >= 0 && intval($grade) <= 100) {
-            $evidence_item = array(
-                "evidence_item" => array(
+            $evidence_item = [
+                "evidence_item" => [
                     "description" => $description,
                     "category" => "grade",
                     "string_object" => (string)$grade,
                     "hidden" => $hidden
-                )
-            );
+                ]
+            ];
 
             $result = $this->createEvidenceItem($evidence_item, $credential_id);
 
@@ -427,10 +427,10 @@ class Api implements ApiInterface
 
         $client = new Client();
 
-        $response = $client->post($this->apiEndpoint . 'credentials/' . $credential_id . '/evidence_items', array(
-            'headers' => array('Authorization' => 'Token token="' . $this->getApiKey() . '"'),
+        $response = $client->post($this->apiEndpoint . 'credentials/' . $credential_id . '/evidence_items', [
+            'headers' => ['Authorization' => 'Token token="' . $this->getApiKey() . '"'],
             'json' => $evidence_item
-        ));
+        ]);
 
         $result = json_decode($response->getBody());
 
@@ -443,22 +443,22 @@ class Api implements ApiInterface
     public function createEvidenceItemDuration($start_date, $end_date, $credential_id, $hidden = false)
     {
 
-        $duration_info = array(
+        $duration_info = [
             'start_date' => date("Y-m-d", strtotime($start_date)),
             'end_date' => date("Y-m-d", strtotime($end_date)),
             'duration_in_days' => floor((strtotime($end_date) - strtotime($start_date)) / 86400)
-        );
+        ];
 
         // multi day duration
         if ($duration_info['duration_in_days'] && $duration_info['duration_in_days'] != 0) {
-            $evidence_item = array(
-                "evidence_item" => array(
+            $evidence_item = [
+                "evidence_item" => [
                     "description" => 'Completed in ' . $duration_info['duration_in_days'] . ' days',
                     "category" => "course_duration",
                     "string_object" => json_encode($duration_info),
                     "hidden" => $hidden
-                )
-            );
+                ]
+            ];
 
             $result = $this->createEvidenceItem($evidence_item, $credential_id);
 
@@ -467,14 +467,14 @@ class Api implements ApiInterface
         } elseif ($duration_info['start_date'] != $duration_info['end_date']) {
             $duration_info['duration_in_days'] = 1;
 
-            $evidence_item = array(
-                "evidence_item" => array(
+            $evidence_item = [
+                "evidence_item" => [
                     "description" => 'Completed in 1 day',
                     "category" => "course_duration",
                     "string_object" => json_encode($duration_info),
                     "hidden" => $hidden
-                )
-            );
+                ]
+            ];
 
             $result = $this->createEvidenceItem($evidence_item, $credential_id);
 
@@ -490,23 +490,23 @@ class Api implements ApiInterface
     public function createEvidenceItemTranscript(array $transcript, $credential_id, $hidden = false)
     {
 
-        $transcript_items = array();
+        $transcript_items = [];
 
         foreach ($transcript as $key => $value) {
-            $transcript_items[] = array(
+            $transcript_items[] = [
                 'category' => $key,
                 'percent' => $value
-            );
+            ];
         }
 
-        $evidence_item = array(
-            "evidence_item" => array(
+        $evidence_item = [
+            "evidence_item" => [
                 "description" => 'Course Transcript',
                 "category" => "transcript",
                 "string_object" => json_encode($transcript_items),
                 "hidden" => $hidden
-            )
-        );
+            ]
+        ];
 
         $result = $this->createEvidenceItem($evidence_item, $credential_id);
 
@@ -525,23 +525,23 @@ class Api implements ApiInterface
         $redirect_to = null
     ) {
 
-        $data = array(
+        $data = [
             "credential_id" => $credential_id,
             "recipient_id" => $recipient_id,
             "recipient_email" => $recipient_email,
             "wallet_view" => $wallet_view,
             "group_id" => $group_id,
             "redirect_to" => $redirect_to,
-        );
+        ];
 
         $data = $this->stripEmptyKeys($data);
 
         $client = new Client();
 
-        $response = $client->post($this->apiEndpoint . 'sso/generate_link', array(
-            'headers' => array('Authorization' => 'Token token="' . $this->getApiKey() . '"'),
+        $response = $client->post($this->apiEndpoint . 'sso/generate_link', [
+            'headers' => ['Authorization' => 'Token token="' . $this->getApiKey() . '"'],
             'json' => $data
-        ));
+        ]);
 
         $result = json_decode($response->getBody());
 
@@ -559,10 +559,10 @@ class Api implements ApiInterface
     {
         $client = new Client();
 
-        $response = $client->post($this->apiEndpoint . 'batch', array(
-            'headers' => array('Authorization' => 'Token token="' . $this->getApiKey() . '"'),
-            'json' => array("ops" => $requests, "sequential" => true)
-        ));
+        $response = $client->post($this->apiEndpoint . 'batch', [
+            'headers' => ['Authorization' => 'Token token="' . $this->getApiKey() . '"'],
+            'json' => ["ops" => $requests, "sequential" => true]
+        ]);
 
         $result = json_decode($response->getBody());
 
@@ -578,7 +578,6 @@ class Api implements ApiInterface
      */
     public function __call($name, $arguments)
     {
-        // TODO: Implement __call() method.
         $method = static::dashesToCamelCase($name);
         if (!method_exists($this, $method)) {
             throw new \BadMethodCallException(sprintf('Call to undefined method %s::%s()', get_class($this), $method));
